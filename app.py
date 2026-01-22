@@ -1006,7 +1006,9 @@ div.stDownloadButton button:hover, div.stButton button:hover {
 st.markdown(
     """
 <div class="hero-header">
-  <div class="hero-title">📊 Curva ABC, Diagnóstico e Ações</div>
+  <div class="hero-title">Strategic Analysis</div>
+  <div class="hero-subtitle">Curva ABC, Diagnóstico e Ações Inteligentes</div>
+</div>
   <div class="hero-subtitle">Análise inteligente para decisões rápidas por frente e prioridade</div>
 </div>
     """,
@@ -1017,13 +1019,13 @@ st.markdown(
 # =========================
 # Helpers visuais
 # =========================
-def render_metric_card(label: str, value: str, icon: str = "📈", color: str = "purple"):
+def render_metric_card(label: str, value: str, icon: str = "○", color: str = "white"):
     st.markdown(
         f"""
-<div class='metric-card {color}'>
-  <div class='metric-icon {color}'>{icon}</div>
+<div class='metric-card'>
+  <div class='metric-icon'>{icon}</div>
   <p class='metric-label'>{label}</p>
-  <p class='metric-value {color}'>{value}</p>
+  <p class='metric-value text-{color}'>{value}</p>
 </div>
         """,
         unsafe_allow_html=True,
@@ -1034,10 +1036,10 @@ def render_metric_grid(metrics: list):
     html = '<div class="metric-grid">'
     for label, value, icon, color in metrics:
         html += f"""
-<div class='metric-card {color}'>
-  <div class='metric-icon {color}'>{icon}</div>
+<div class='metric-card'>
+  <div class='metric-icon'>{icon}</div>
   <p class='metric-label'>{label}</p>
-  <p class='metric-value {color}'>{value}</p>
+  <p class='metric-value text-{color}'>{value}</p>
 </div>
         """
     html += '</div>'
@@ -1048,7 +1050,7 @@ def render_logistics_section(full_pct: float, correios_pct: float, flex_pct: flo
     html = f"""
 <div class="section-box">
   <div class="section-header">
-    <div class="section-icon cyan">🚚</div>
+    <div class="section-icon cyan">⬖</div>
     <div>
       <div class="section-title">Logística - Período {period}</div>
       <div class="section-desc">Distribuição por forma de entrega</div>
@@ -1056,7 +1058,7 @@ def render_logistics_section(full_pct: float, correios_pct: float, flex_pct: flo
   </div>
   <div class="logistics-grid">
     <div class="logistics-card full">
-      <div class="logistics-icon">📦</div>
+      <div class="logistics-icon">□</div>
       <div class="logistics-title">Full</div>
       <div class="logistics-value full">{full_pct:.1f}%</div>
       <div class="logistics-bar">
@@ -1089,7 +1091,7 @@ def render_ads_section(ads_pct: float, organic_pct: float, ads_qty: int, organic
     html = f"""
 <div class="ads-container">
   <div class="ads-header">
-    <div class="ads-icon">📢</div>
+    <div class="ads-icon">◇</div>
     <div class="ads-title">Vendas por Publicidade - Período {period}</div>
   </div>
   <div class="ads-grid">
@@ -1104,7 +1106,7 @@ def render_ads_section(ads_pct: float, organic_pct: float, ads_qty: int, organic
   </div>
   <div class="ads-bar-container">
     <div class="ads-bar-labels">
-      <span>📢 Ads</span>
+      <span>◇ Ads</span>
       <span>🌱 Orgânico</span>
     </div>
     <div class="ads-bar">
@@ -1178,7 +1180,7 @@ def render_tactical_card(row: dict, frente: str):
       <div class='tactical-metric-label'>Qtd. Atual</div>
     </div>
   </div>
-  <div class='tactical-action'>💡 {row.get('Ação sugerida', 'Sem ação definida')}</div>
+  <div class='tactical-action'>• {row.get('Ação sugerida', 'Sem ação definida')}</div>
 </div>
     """
 
@@ -1234,13 +1236,13 @@ def render_insight_card(icon: str, title: str, text: str):
 </div>
     """
 
-def section_header(title: str, desc: str, icon: str = "📊", color: str = "purple"):
+def section_header(title: str, desc: str, icon: str = "○", color: str = "purple"):
     """Renderiza header de seção"""
     st.markdown(
         f"""
-<div class='section-box'>
+<div class='glass-card'>
   <div class='section-header'>
-    <div class='section-icon {color}'>{icon}</div>
+    <div class='metric-icon'>{icon}</div>
     <div>
       <div class='section-title'>{title}</div>
       <div class='section-desc'>{desc}</div>
@@ -1284,7 +1286,7 @@ def render_front_card(icon: str, title: str, desc: str, itens: int, fat: float, 
         unsafe_allow_html=True,
     )
     st.download_button(
-        f"📥 Baixar {title}",
+        f"↓ Baixar {title}",
         data=to_csv_bytes(df_seg),
         file_name=filename,
         mime="text/csv",
@@ -1723,7 +1725,7 @@ with st.sidebar:
     st.markdown(
         """
 <div style="text-align: center; padding: 10px 0 20px 0;">
-  <div style="font-size: 2rem; margin-bottom: 4px;">📊</div>
+  <div style="font-size: 2rem; margin-bottom: 4px;">○</div>
   <div style="font-size: 1.1rem; font-weight: 800; background: linear-gradient(135deg, #fff, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Curva ABC</div>
   <div style="font-size: 0.75rem; opacity: 0.5;">Diagnóstico & Ações</div>
 </div>
@@ -1747,7 +1749,7 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
     
-    main_file = st.file_uploader("📈 Relatório de Vendas (120 dias)", type=["xlsx", "xls"], key="main_file", help="Arquivo exportado do Mercado Livre com dados de vendas dos últimos 120 dias")
+    main_file = st.file_uploader("↗ Relatório de Vendas (120 dias)", type=["xlsx", "xls"], key="main_file", help="Arquivo exportado do Mercado Livre com dados de vendas dos últimos 120 dias")
     enrich_file = st.file_uploader("📋 Enriquecimento (opcional)", type=["xlsx", "xls", "csv"], key="enrich_file", help="Arquivo adicional com dados de custo, margem, etc.")
 
     st.markdown('<div style="height:12px"></div>', unsafe_allow_html=True)
@@ -1779,7 +1781,7 @@ with st.sidebar:
     st.markdown(
         """
 <div class='sidebar-tip'>
-  💡 <strong>Dica:</strong> Use as curvas para focar sua análise. Curva A são seus produtos estrela!
+  • <strong>Dica:</strong> Use as curvas para focar sua análise. Curva A são seus produtos estrela!
 </div>
         """,
         unsafe_allow_html=True,
@@ -1975,14 +1977,14 @@ def tm_direction(a, b, c):
     if np.isnan(a) or np.isnan(b) or np.isnan(c):
         return "Sem dados suficientes para leitura do ticket médio."
     if a < b < c:
-        return "📈 Ticket médio subindo. Ajuda margem, mas pode cair volume se preço esticar."
+        return "↗ Ticket médio subindo. Ajuda margem, mas pode cair volume se preço esticar."
     if a > b > c:
         return "📉 Ticket médio caindo. Pode ser mix mais barato ou promoções."
     if b < a and c > b:
         return "🔄 Ticket caiu e depois recuperou."
     if b > a and c < b:
         return "⚡ Ticket subiu e depois caiu."
-    return "📊 Ticket oscilando. Vale cruzar com mix e concorrência."
+    return "○ Ticket oscilando. Vale cruzar com mix e concorrência."
 
 tm_reading = tm_direction(tm_0_30, tm_31_60, tm_61_90)
 
@@ -1995,16 +1997,16 @@ tt_qty = int(df_f[QTY_COLS].sum().sum())
 
 # Renderiza métricas principais
 render_metric_grid([
-    ("Total de Anúncios", br_int(total_ads), "📦", "purple"),
+    ("Total de Anúncios", br_int(total_ads), "□", "purple"),
     ("Faturamento Total", br_money(tt_fat), "💰", "green"),
-    ("Quantidade Total", br_int(tt_qty), "📊", "blue"),
+    ("Quantidade Total", br_int(tt_qty), "○", "blue"),
     ("Ticket Médio", br_money(safe_div(tt_fat, tt_qty) if tt_qty else 0.0), "🎯", "amber"),
 ])
 
 st.markdown('<div style="height:1rem"></div>', unsafe_allow_html=True)
 
 tab1, tab2, tab3, tab4 = st.tabs(
-    ["📊 Dashboard", "📥 Listas e Exportação", "📋 Plano Tático", "📈 Relatório Estratégico"]
+    ["○ Dashboard", "↓ Listas e Exportação", "📋 Plano Tático", "↗ Relatório Estratégico"]
 )
 
 # =========================
@@ -2050,7 +2052,7 @@ with tab1:
     # Métricas do período
     render_metric_grid([
         (f"Faturamento {selected_period}", br_money(period_fat), "💰", "green"),
-        (f"Quantidade {selected_period}", br_int(period_qty), "📦", "blue"),
+        (f"Quantidade {selected_period}", br_int(period_qty), "□", "blue"),
         (f"Ticket Médio {selected_period}", br_money(period_tm), "🎯", "amber"),
         (f"Curva A ({selected_period})", br_int(dist_period.get("A", 0)), "⭐", "purple"),
     ])
@@ -2104,7 +2106,7 @@ with tab1:
     else:
         # Fallback para cálculo antigo se não tiver dados de logística
         if all(c in df_f.columns for c in [f"Share Full Qtd {selected_period}", f"Share Full Fat {selected_period}"]):
-            section_header(f"Logística no Período {selected_period}", "Distribuição FULL vs NÃO FULL", "🚚", "cyan")
+            section_header(f"Logística no Período {selected_period}", "Distribuição FULL vs NÃO FULL", "⬖", "cyan")
             qtd_total = float(df_f[qty_col].sum())
             fat_total = float(df_f[fat_col].sum())
             share_full_qtd = (
@@ -2118,7 +2120,7 @@ with tab1:
             dom = "FULL" if share_full_qtd >= 0.5 else "NÃO FULL"
             
             render_metric_grid([
-                ("FULL por Quantidade", pct(share_full_qtd, 1), "📦", "cyan"),
+                ("FULL por Quantidade", pct(share_full_qtd, 1), "□", "cyan"),
                 ("FULL por Faturamento", pct(share_full_fat, 1), "💵", "green"),
                 ("Logística Dominante", dom, "🏆", "purple" if dom == "FULL" else "amber"),
             ])
@@ -2137,7 +2139,7 @@ with tab1:
                 period=selected_period
             )
 
-    section_header("Faturamento por Curva e Período", "Comparativo entre as janelas de tempo", "📊", "green")
+    section_header("Faturamento por Curva e Período", "Comparativo entre as janelas de tempo", "○", "green")
     rev_rows = []
     for p, cc, qq, ff in periods:
         grp = df_f.groupby(cc)[ff].sum()
@@ -2162,7 +2164,7 @@ with tab1:
     st.plotly_chart(fig2, use_container_width=True)
     section_footer()
 
-    section_header("Evolução do Ticket Médio", "Tendência ao longo dos períodos", "📈", "amber")
+    section_header("Evolução do Ticket Médio", "Tendência ao longo dos períodos", "↗", "amber")
     tm_df = kpi_df.copy()
     tm_df["Ticket médio"] = tm_df["Ticket médio"].fillna(0.0)
     fig3 = px.line(
@@ -2218,13 +2220,13 @@ with tab1:
 # TAB 2: Listas e Exportação (MELHORADA)
 # =========================
 with tab2:
-    st.markdown(render_report_section("📥", "Central de Exportação", "Baixe listas segmentadas para ação imediata", "blue"), unsafe_allow_html=True)
+    st.markdown(render_report_section("↓", "Central de Exportação", "Baixe listas segmentadas para ação imediata", "blue"), unsafe_allow_html=True)
     
     # Dica
     st.markdown(
         """
 <div class='insight-card'>
-  <div class='insight-icon'>💡</div>
+  <div class='insight-icon'>•</div>
   <div class='insight-title'>Dica de Uso</div>
   <div class='insight-text'>Baixe a lista, preencha custo/margem/ads nela, junte tudo num único arquivo de enriquecimento e suba no upload opcional da sidebar para análises mais completas.</div>
 </div>
@@ -2287,29 +2289,29 @@ with tab2:
     
     with col1:
         st.markdown(render_export_card("🛡️", "Âncoras", "Produtos estáveis em curva A", len(anchors_export), get_fat(anchors_export), "defense"), unsafe_allow_html=True)
-        st.download_button("📥 Baixar CSV", data=to_csv_bytes(anchors_export), file_name="ancoras.csv", mime="text/csv", key="exp_anc", use_container_width=True)
+        st.download_button("↓ Baixar CSV", data=to_csv_bytes(anchors_export), file_name="ancoras.csv", mime="text/csv", key="exp_anc", use_container_width=True)
     
     with col2:
         st.markdown(render_export_card("⚠️", "Fuga de Receita", "Produtos que caíram de curva", len(drop_export), get_fat(drop_export), "correction"), unsafe_allow_html=True)
-        st.download_button("📥 Baixar CSV", data=to_csv_bytes(drop_export), file_name="fuga_receita.csv", mime="text/csv", key="exp_drop", use_container_width=True)
+        st.download_button("↓ Baixar CSV", data=to_csv_bytes(drop_export), file_name="fuga_receita.csv", mime="text/csv", key="exp_drop", use_container_width=True)
     
     with col3:
         st.markdown(render_export_card("🚀", "Crescimento", "Produtos em ascensão", len(opp_export), get_fat(opp_export), "attack"), unsafe_allow_html=True)
-        st.download_button("📥 Baixar CSV", data=to_csv_bytes(opp_export), file_name="crescimento.csv", mime="text/csv", key="exp_opp", use_container_width=True)
+        st.download_button("↓ Baixar CSV", data=to_csv_bytes(opp_export), file_name="crescimento.csv", mime="text/csv", key="exp_opp", use_container_width=True)
 
     col4, col5, col6 = st.columns(3)
     
     with col4:
         st.markdown(render_export_card("🧹", "Inativar", "Produtos sem giro", len(inactivate_export), get_fat(inactivate_export), "cleanup"), unsafe_allow_html=True)
-        st.download_button("📥 Baixar CSV", data=to_csv_bytes(inactivate_export), file_name="inativar.csv", mime="text/csv", key="exp_ina", use_container_width=True)
+        st.download_button("↓ Baixar CSV", data=to_csv_bytes(inactivate_export), file_name="inativar.csv", mime="text/csv", key="exp_ina", use_container_width=True)
     
     with col5:
         st.markdown(render_export_card("🔄", "Revitalizar", "Produtos para recuperar", len(revitalize_export), get_fat(revitalize_export), "opportunity"), unsafe_allow_html=True)
-        st.download_button("📥 Baixar CSV", data=to_csv_bytes(revitalize_export), file_name="revitalizar.csv", mime="text/csv", key="exp_rev", use_container_width=True)
+        st.download_button("↓ Baixar CSV", data=to_csv_bytes(revitalize_export), file_name="revitalizar.csv", mime="text/csv", key="exp_rev", use_container_width=True)
     
     with col6:
         st.markdown(render_export_card("🎁", "Combos/Liquidação", "Produtos para kits", len(combo_export), get_fat(combo_export), "combo"), unsafe_allow_html=True)
-        st.download_button("📥 Baixar CSV", data=to_csv_bytes(combo_export), file_name="combos.csv", mime="text/csv", key="exp_combo", use_container_width=True)
+        st.download_button("↓ Baixar CSV", data=to_csv_bytes(combo_export), file_name="combos.csv", mime="text/csv", key="exp_combo", use_container_width=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -2428,11 +2430,11 @@ with tab3:
     # Métricas resumidas
     res_cols = st.columns(4)
     with res_cols[0]:
-        st.metric("📦 Produtos Filtrados", f"{len(view):,}")
+        st.metric("□ Produtos Filtrados", f"{len(view):,}")
     with res_cols[1]:
         st.metric("💰 Fat. Total", br_money(view["Fat total"].sum()))
     with res_cols[2]:
-        st.metric("📈 Qtd. Total", f"{int(view['Qtd total'].sum()):,}")
+        st.metric("↗ Qtd. Total", f"{int(view['Qtd total'].sum()):,}")
     with res_cols[3]:
         avg_tm = view["TM total"].mean() if len(view) > 0 else 0
         st.metric("💵 TM Médio", br_money(avg_tm))
@@ -2452,7 +2454,7 @@ with tab3:
 
     # Botão de download
     st.download_button(
-        "📥 Baixar CSV do Plano Filtrado",
+        "↓ Baixar CSV do Plano Filtrado",
         data=to_csv_bytes(view_show),
         file_name="plano_tatico.csv",
         mime="text/csv",
@@ -2500,7 +2502,7 @@ with tab4:
     )
     
     # Insight do ticket médio
-    st.markdown(render_insight_card("📊", "Análise do Ticket Médio", tm_reading), unsafe_allow_html=True)
+    st.markdown(render_insight_card("○", "Análise do Ticket Médio", tm_reading), unsafe_allow_html=True)
     
     # Distribuição de curvas
     col1, col2 = st.columns(2)
@@ -2519,7 +2521,7 @@ with tab4:
     st.markdown("</div>", unsafe_allow_html=True)
 
     # Seção 2: Segmentação
-    st.markdown(render_report_section("📦", "Segmentação de Produtos", "Análise por categoria estratégica", "blue"), unsafe_allow_html=True)
+    st.markdown(render_report_section("□", "Segmentação de Produtos", "Análise por categoria estratégica", "blue"), unsafe_allow_html=True)
     
     # Resumo das frentes
     front_counts_all = plan["Frente"].value_counts()
@@ -2593,7 +2595,7 @@ with tab4:
     op = op.sort_values(["Frente", "Fat. 0-30"], ascending=[True, False])
 
     st.download_button(
-        "📥 Baixar Plano Operacional Completo",
+        "↓ Baixar Plano Operacional Completo",
         data=to_csv_bytes(op),
         file_name="plano_operacional_completo.csv",
         mime="text/csv",
@@ -2606,7 +2608,7 @@ with tab4:
         if len(subset) == 0:
             continue
         
-        icon = {"LIMPEZA": "🧹", "CORREÇÃO": "⚠️", "ATAQUE": "🚀", "DEFESA": "🛡️", "OTIMIZAÇÃO": "⚙️"}.get(fr, "📦")
+        icon = {"LIMPEZA": "🧹", "CORREÇÃO": "⚠️", "ATAQUE": "🚀", "DEFESA": "🛡️", "OTIMIZAÇÃO": "⚙️"}.get(fr, "□")
         
         with st.expander(f"{icon} {fr} ({len(op[op['Frente'] == fr])} itens)", expanded=False):
             subset["Fat. 0-30"] = subset["Fat. 0-30"].apply(lambda x: br_money(float(x)) if pd.notna(x) else "-")
@@ -2619,7 +2621,7 @@ st.markdown('<div style="height:2rem"></div>', unsafe_allow_html=True)
 st.markdown(
     """
     <div style="text-align: center; opacity: 0.5; font-size: 0.85rem; padding: 20px 0;">
-        📊 Curva ABC Dashboard v3.1 | Análise inteligente para decisões rápidas
+        ○ Curva ABC Dashboard v3.1 | Análise inteligente para decisões rápidas
     </div>
     """,
     unsafe_allow_html=True
